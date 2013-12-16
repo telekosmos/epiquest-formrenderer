@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="Appform WebApp" basedir="." default="formrenderer-jar">
+  <!-- project-specific variables -->
+  <property environment="env" />
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.args" value="" />
+
+  <property name="package.name" value="formrender.jar" />
+  <property name="dest.dir"
+            value="/Users/bioinfo/Development/deploy/appform" />
+
+  <property name="dev.root" value="/Users/bioinfo/Development" />
+  <property name="groovy.dev.root" value="/Users/bioinfo/Development/groovy" />
+  <property name="project.root" value="${groovy.dev.root}/FormRenderer" />
+  <property name="src.dir" value="${project.root}/src" />
+
+    
+  <property name="groovy.root.path" value="/usr/local/groovy-1.7.0" />
+  <property name="groovy.lib.path" value="${groovy.root.path}/lib" />
+  <property name="groovy.bin.path" value="${groovy.root.path}/bin" />
+    
+  <!-- lib and classes built related dirs -->
+  <property name="build.dir" value="${project.root}/out/production" />
+  <property name="lib.dir" value="${dev.root}/commons-lib" />
+
+  <path id="appform-lib-jars">
+    <pathelement location="${lib.dir}/appform-lib/activation.jar"/>
+    <pathelement location="${lib.dir}/appform-lib/antlr-2.7.6.jar"/>
+    <pathelement location="${lib.dir}/appform-lib/asm-all-2.2.3.jar"/>
+    <pathelement location="${lib.dir}/appform-lib/aspectjrt.jar"/>
+    <pathelement location="${lib.dir}/appform-lib/aspectjtools.jar"/>
+    <pathelement location="${lib.dir}/appform-lib/aspectjweaver.jar"/>
+    <pathelement location="${lib.dir}/appform-lib/axis.jar"/>
+    <pathelement location="${lib.dir}/appform-lib/c3p0-0.9.1.jar"/>
+    <pathelement location="${lib.dir}/appform-lib/cglib-nodep-2.1_3.jar"/>
+    <pathelement location="${lib.dir}/appform-lib/commons-collections-2.1.1.jar"/>
+    <pathelement location="${lib.dir}/appform-lib/commons-discovery-0.2.jar"/>
+    <pathelement location="${lib.dir}/appform-lib/commons-lang-2.4.jar"/>
+    <pathelement location="${lib.dir}/appform-lib/commons-logging-1.1.1.jar"/>
+    <pathelement location="${lib.dir}/appform-lib/commons-logging-api-1.1.1.jar"/>
+    <pathelement location="${lib.dir}/appform-lib/dom4j-1.6.1.jar"/>
+    <pathelement location="${lib.dir}/appform-lib/ejb3-persistence.jar"/>
+    <pathelement location="${lib.dir}/appform-lib/hibernate-annotations.jar"/>
+    <pathelement location="${lib.dir}/appform-lib/hibernate-commons-annotations.jar"/>
+    <pathelement location="${lib.dir}/appform-lib/hibernate3.jar"/>
+    <pathelement location="${lib.dir}/appform-lib/jaxrpc.jar"/>
+    <pathelement location="${lib.dir}/appform-lib/jcaptcha-1.0-all.jar"/>
+    <pathelement location="${lib.dir}/appform-lib/json-taglib-0.4.1.jar"/>
+    <pathelement location="${lib.dir}/appform-lib/json_simple-1.1.jar"/>
+    <pathelement location="${lib.dir}/appform-lib/jsonjava.jar"/>
+    <pathelement location="${lib.dir}/appform-lib/jstl.jar"/>
+    <pathelement location="${lib.dir}/appform-lib/jta.jar"/>
+    <pathelement location="${lib.dir}/appform-lib/log4j-1.2.14.jar"/>
+    <pathelement location="${lib.dir}/appform-lib/mail.jar"/>
+    <pathelement location="${lib.dir}/appform-lib/saaj.jar"/>
+    <pathelement location="${lib.dir}/appform-lib/standard.jar"/>
+    <pathelement location="${lib.dir}/appform-lib/wsdl4j-1.5.1.jar"/>
+  </path>
+    
+    
+  <path id="groovy1.7.libs">
+    <pathelement location="${groovy.lib.path}/ant-1.7.1.jar"/>
+    <pathelement location="${groovy.lib.path}/ant-junit-1.7.1.jar"/>
+    <pathelement location="${groovy.lib.path}/ant-launcher-1.7.1.jar"/>
+    <pathelement location="${groovy.lib.path}/antlr-2.7.7.jar"/>
+    <pathelement location="${groovy.lib.path}/asm-3.2.jar"/>
+    <pathelement location="${groovy.lib.path}/asm-analysis-3.2.jar"/>
+    <pathelement location="${groovy.lib.path}/asm-commons-3.2.jar"/>
+    <pathelement location="${groovy.lib.path}/asm-tree-3.2.jar"/>
+    <pathelement location="${groovy.lib.path}/asm-util-3.2.jar"/>
+    <pathelement location="${groovy.lib.path}/bsf-2.4.0.jar"/>
+    <pathelement location="${groovy.lib.path}/commons-cli-1.2.jar"/>
+    <pathelement location="${groovy.lib.path}/commons-logging-1.1.1.jar"/>
+    <pathelement location="${groovy.lib.path}/groovy-1.7.0.jar"/>
+    <pathelement location="${groovy.lib.path}/ivy-2.1.0.jar"/>
+    <pathelement location="${groovy.lib.path}/jline-0.9.94.jar"/>
+    <pathelement location="${groovy.lib.path}/jsp-api-2.0.jar"/>
+    <pathelement location="${groovy.lib.path}/junit-4.7.jar"/>
+    <pathelement location="${groovy.lib.path}/servlet-api-2.4.jar"/>
+    <pathelement location="${groovy.lib.path}/xstream-1.3.1.jar"/>
+  </path>
+    
+
+  <path id="appform.libs">
+    <pathelement location="${lib.dir}/mylibs/padme-appform-classes.jar" />
+    <pathelement location="${lib.dir}/mylibs/padme-domain-classes.jar" />
+  </path>
+
+
+  <path id="project.classpath">
+    <path refid="groovy1.7.libs" />
+    <path refid="appform-lib-jars" />
+    <path refid="appform.libs" />
+  </path>
+
+<!-- These two tags are both necessary to run the groovy compilation -->
+<!-- path tag contains the classpath where groovy-all-1.7.0.jar is located -->
+  <path id="groovy.need.classpath">
+    <fileset dir="${lib.dir}" includes="**/*.jar"/>
+  </path>
+  <taskdef name="groovyc" classpathref="groovy.need.classpath"
+           classname="org.codehaus.groovy.ant.Groovyc" />
+
+
+<!-- Files compilation, NO generated JAR file so far -->
+  <target name="compile.module.formrenderer"
+          description="Compile module FormRenderer; production classes">
+<!--    <mkdir dir="${formrenderer.output.dir}"/> -->
+    <groovyc destdir="${build.dir}" fork="yes" srcdir="${src.dir}">
+<!--      <src refid="formrenderer.module.sourcepath"/> -->
+<!-- necessary classpath for a correct compilation -->
+      <classpath refid="project.classpath"/>
+<!-- pattern to exclude files
+      <patternset refid="excluded.from.compilation.formrenderer"/>
+-->
+      <javac debug="${compiler.debug}">
+        <compilerarg line="${compiler.args}"/>
+      </javac>
+
+    </groovyc>
+<!--
+    <copy todir="${formrenderer.output.dir}">
+      <fileset dir="${module.formrenderer.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+-->
+  </target>
+
+
+
+  <target name="formrenderer-jar" depends="compile.module.formrenderer">
+    <echo>*** Packing classes in a single JAR  ***</echo>
+
+    <jar destfile="${dest.dir}/formrenderer.jar">
+      <fileset dir="${build.dir}" id="classes" includes="**/*.class"
+        excludes="*.class **/unit/* **/integration/* **/java/*.class"/>
+<!--      <fileset dir="${lib.dir}" id="libs" /> -->
+    </jar>
+
+  </target>
+
+
+
+<!-- TODO Hay que incluir targets para montar el jar -->
+<!-- TODO Targets para preproduccion y producción -->
+
+
+</project>

@@ -1,0 +1,85 @@
+<!-- Here starts the form to collect the interview data -->
+<div id="form">
+
+
+  <form id="sectionForm" name="sectionForm">
+    <span class="titleForm">B. Trabajo en turnos</span><br><br>
+    <table>
+      <input id="patId" name="patId" value="3060" type="hidden">
+      <input id="secId" name="secId" value="100" type="hidden">
+      <input id="finish" name="finish" value="0" type="hidden">
+      <tbody>
+      <tr>
+        <td><b>Me gustaría que pensara en todos los trabajos que haya tenido en
+          la vida.
+        </b><br></td>
+      </tr>
+
+      <tr>
+        <td>B1. Ha trabajado, durante 6 meses o más, solo en turno de noche?
+
+
+        </td>
+      </tr>
+      <tr>
+        <td>
+          &nbsp;<select name="q157-1-1" id="q157-1-1" style="width: 150px;"
+                        onblur="intrvFormCtrl.sendItem('S', this)"
+                        onfocus="intrvFormCtrl.onfocus(this.name)">
+          <option value="9999"></option>
+          <option value="1">Sí</option>
+          <option value="2" selected="selected">No</option>
+          <option value="8888">NS</option>
+        </select>
+
+        </td>
+      </tr>
+      <tr>
+        <td><i>ENTREVISTADOR: Se considera turno de noche cualquier trabajo en
+          que se entra a partir de las 8 de la noche y finaliza después de las 4
+          de la mañana
+        </i><br></td>
+      </tr>
+
+      <tr>
+        <td>B2. ¿Ha trabajado, durante al menos 6 meses, alternando turno de
+          noche y otros turnos?
+
+
+        </td>
+      </tr>
+      <tr>
+        <td>
+          &nbsp;<select name="q159-1-1" id="q159-1-1" style="width: 150px;"
+                        onblur="intrvFormCtrl.sendItem('S', this)"
+                        onfocus="intrvFormCtrl.onfocus(this.name)">
+          <option value="9999"></option>
+          <option value="1">Sí</option>
+          <option value="2" selected="selected">No</option>
+          <option value="8888">NS</option>
+        </select>
+
+        </td>
+      </tr>
+      <tr>
+        <td><i>ENTREVISTADOR: Otros turnos pueden ser: mañana o tarde
+        </i><br></td>
+      </tr>
+
+      <tr>
+        <td>
+          <br>
+          <input name="currentsec" id="currentsec" value="2" type="hidden">
+          <input name="btnSend" value=" Continuar "
+                 onclick="intrvFormCtrl.send(this.form);" type="button">&nbsp;&nbsp;
+          <input name="btnEnd" value=" Guardar "
+                 onclick="intrvFormCtrl.finish(this.form,2);" type="button">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </form>
+
+</div>
+<!-- Form end -->					
+				
